@@ -23,14 +23,16 @@ v1.0.1
 使用方法：
 -------------
 
-1. 安装yeoman（不用反复安装）：
+1. 安装yeoman（再次使用不用反复安装）：
 		
 		npm install -g yo
 
-2. 命令行进入generator-xxx，执行：
+2. 命令行进入generator-xxx，执行（再次使用不用反复执行，只需从github上下载最新版本覆盖旧版本即可）：
 
 		npm link
 
 3. 新建项目文件夹并进入，执行：
 
 		yo xxx [option]
+
+4. 
