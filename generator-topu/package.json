@@ -1,0 +1,17 @@
+{
+    "name": "generator-topu",
+    "version": "1.0.1",
+    "description": "Topu.net Yeoman生成模板",
+    "keywords": [
+        "yeoman-generator topu.net"
+    ],
+    "dependencies": {
+        "yeoman-generator": "^0.24.1"
+    },
+    "files": [
+        "app/",
+        "common/",
+        "web/",
+        "wap/"
+    ]
+}
