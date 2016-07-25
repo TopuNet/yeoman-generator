@@ -12,10 +12,14 @@ module.exports = generators.Base.extend({
 
             this.argument("arg_env", { type: String, required: false, defaults: '' });
 
-            if (this.arg_env.toLowerCase() == "web")
+            var arg_env = this.arg_env.toLowerCase().split(',');
+
+            if (arg_env.indexOf('web') > -1)
                 this.composeWith("topu:web");
-            if (this.arg_env.toLowerCase() == "wap")
+            if (arg_env.indexOf('wap') > -1)
                 this.composeWith('topu:wap');
+            if (arg_env.indexOf('node') > -1)
+                this.composeWith('topu:node');
         }
     }
 });

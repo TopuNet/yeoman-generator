@@ -1,11 +1,16 @@
-# yeoman-generator v1.0.1
+# yeoman-generator v1.1.1
 ### yeoman-generator
 
 更新日志
 --------------
+v1.1.1
+
+	        1. 支持一次传入多个option（逗号分隔），如：yo topu web,node
+	        2. 增加option：node
+
 v1.0.1
 
-        项目创建、发布
+	        项目创建、发布
 
 
 生成器目录：
@@ -14,10 +19,11 @@ v1.0.1
 
 		拓扑高科新项目生成器
 		
-		option(必填):
+		option(必填，多个用逗号分隔，如：yo topu web,node):
 
 			(1) web: pc端项目
 			(2) wap: 移动端项目
+			(3) node: node架构项目
         
 
 使用方法：
@@ -33,6 +39,4 @@ v1.0.1
 
 3. 新建项目文件夹并进入，执行：
 
-		yo xxx [option]
-
-4. 
+		yo xxx [option1[,option2,...]]

@@ -14,7 +14,7 @@ module.exports = generators.Base.extend({
     },
     install: {
         npm: function() {
-            this.npmInstall(["TopuNet-RequireJS", "TopuNet-AMD-modules", "TopuNet-PromptLayer-JS", "TopuNet-RotatingBanner", "TopuNet-BaiduMap"]);
+            this.npmInstall(["TopuNet-RequireJS", "TopuNet-AMD-modules", "TopuNet-PromptLayer-JS", "TopuNet-RotatingBanner", "TopuNet-BaiduMap", "TopuNet-js-functions"]);
         },
         bower: function() {
             // this.bowerInstall(["jquery"]);
@@ -58,6 +58,11 @@ module.exports = generators.Base.extend({
             var _source = cwd + "/node_modules/TopuNet-BaiduMap/jq";
             var _des = "web/widget/lib";
             this.directory(_source, _des);
+        },
+        copy_js_functions: function() {
+            var _source = cwd + "/node_modules/TopuNet-js-functions/functions.js";
+            var _des = "web/widget/lib/functions.js";
+            this.copy(_source, _des);
         }
     }
 
