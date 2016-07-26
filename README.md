@@ -1,5 +1,6 @@
 # yeoman-generator v1.1.2
 ### yeoman-generator
+### 安装：npm install generator-topu
 
 更新日志
 --------------
