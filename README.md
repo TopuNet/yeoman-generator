@@ -1,8 +1,12 @@
-# yeoman-generator v1.1.1
+# yeoman-generator v1.1.2
 ### yeoman-generator
 
 更新日志
 --------------
+v1.1.2
+
+	        topu:wap的template/zepto.min.js有问题，更新到最新版本。
+
 v1.1.1
 
 	        1. 支持一次传入多个option（逗号分隔），如：yo topu web,node
