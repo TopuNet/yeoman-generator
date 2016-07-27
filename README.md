@@ -1,9 +1,15 @@
-# yeoman-generator v1.1.2
+# yeoman-generator v1.1.3
 ### yeoman-generator
 ### 安装：npm install generator-topu
 
 更新日志
 --------------
+v1.1.3
+
+	        1. topu:wap的zepto从inc移动到/widget/lib/
+	        2. topu:common增加图片验证码插件——TopuNet-Pic-code
+	        3. npm发布失误，增加了一个1.3.3版本……unpublish了
+
 v1.1.2
 
 	        topu:wap的template/zepto.min.js有问题，更新到最新版本。
