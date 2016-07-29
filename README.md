@@ -1,9 +1,15 @@
-# yeoman-generator v1.1.3
+# yeoman-generator v1.1.4
 ### yeoman-generator
 ### 安装：npm install generator-topu
 
 更新日志
 --------------
+v1.1.4
+
+	        1. topu:node修改images依赖的版本为固定2.1.11
+	        2. topu:node的template增加routes/404和captcha
+	        3. topu:node修改app.js
+
 v1.1.3
 
 	        1. topu:wap的zepto从inc移动到/widget/lib/

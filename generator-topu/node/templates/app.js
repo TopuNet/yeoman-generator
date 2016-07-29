@@ -13,11 +13,12 @@ var config = require("./handle/config.js");
 
 var app = express();
 
+/*
 //判断为pc端还是手机端
 app.use(function(req, res, next) {
+    //判断是否为pc端
     var deviceAgent = req.headers["user-agent"].toLowerCase();
 
-    //判断是否为pc端
     var agentID = deviceAgent.match(/(x11|macintosh|windows)/);
 
     if (agentID)
@@ -25,6 +26,7 @@ app.use(function(req, res, next) {
     else
         res.redirect("http://m.51icb.com");
 });
+*/
 
 //setup session
 app.use(cookieParser());
@@ -143,17 +145,15 @@ app.use(xmlParser({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, ''), {
-    maxAge: '365days'
+    // maxAge: '365days' // pub
+    maxAge: '0' // dev
 }));
 
 // routes
 var p404 = require('./routes/404.js'); // 404
 var captcha = require('./routes/captcha.js'); // 验证码
-var files = require('./routes/files.js'); // 
 
 app.use('/captcha', captcha);
-
-app.use(files); // 所有页面
 
 app.use(p404); // 404 || 500
 
