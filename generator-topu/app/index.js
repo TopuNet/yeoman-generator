@@ -20,6 +20,8 @@ module.exports = generators.Base.extend({
                 this.composeWith('topu:wap');
             if (arg_env.indexOf('node') > -1)
                 this.composeWith('topu:node');
+            if (arg_env.indexOf('weixin') > -1)
+                this.composeWith('topu:weixin');
         }
     }
 });

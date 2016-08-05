@@ -1,9 +1,12 @@
-# yeoman-generator v1.1.4
-### yeoman-generator
+# yeoman-generator v1.1.5
 ### 安装：npm install generator-topu
 
 更新日志
 --------------
+v1.1.5
+
+	        1. 增加option：weixin，自动下载node端weixin类库
+
 v1.1.4
 
 	        1. topu:node修改images依赖的版本为固定2.1.11
@@ -41,6 +44,7 @@ v1.0.1
 			(1) web: pc端项目
 			(2) wap: 移动端项目
 			(3) node: node架构项目
+			(4) weixin: node端微信类库
         
 
 使用方法：
