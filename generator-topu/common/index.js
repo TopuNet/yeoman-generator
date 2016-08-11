@@ -14,7 +14,7 @@ module.exports = generators.Base.extend({
     },
     install: {
         npm: function() {
-            this.npmInstall(["TopuNet-RequireJS", "TopuNet-AMD-modules", "TopuNet-PromptLayer-JS", "TopuNet-RotatingBanner", "TopuNet-BaiduMap", "TopuNet-js-functions", "TopuNet-Pic-code"]);
+            this.npmInstall(["TopuNet-RequireJS", "TopuNet-AMD-modules", "TopuNet-PromptLayer-JS", "TopuNet-RotatingBanner", "TopuNet-BaiduMap", "TopuNet-js-functions", "TopuNet-Pic-code", "TopuNet-dropDownLoad"]);
         },
         bower: function() {
             // this.bowerInstall(["jquery"]);
@@ -63,6 +63,15 @@ module.exports = generators.Base.extend({
             var _source = cwd + "/node_modules/TopuNet-Pic-code/jq/pic_code.js";
             var _des = "web/widget/lib/pic_code.js";
             this.copy(_source, _des);
+        },
+        copy_dropDownLoad: function() {
+            var _source = cwd + "/node_modules/TopuNet-dropDownLoad/inc";
+            var _des = "web/inc";
+            this.directory(_source, _des);
+
+            var _source = cwd + "/node_modules/TopuNet-dropDownLoad/jq";
+            var _des = "web/widget/lib";
+            this.directory(_source, _des);
         }
     }
 

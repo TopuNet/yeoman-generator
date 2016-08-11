@@ -1,6 +1,6 @@
 {
     "name": "generator-topu",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "description": "Topu.net Yeoman生成模板",
     "keywords": [
         "yeoman-generator topu.net"

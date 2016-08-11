@@ -1,8 +1,12 @@
-# yeoman-generator v1.1.5
+# yeoman-generator v1.1.6
 ### 安装：npm install generator-topu
 
 更新日志
 --------------
+v1.1.6
+
+	        1. topu:common增加插件：TopuNet-dropDownLoad
+
 v1.1.5
 
 	        1. 增加option：weixin，自动下载node端weixin类库
