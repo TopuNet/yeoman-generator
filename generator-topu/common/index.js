@@ -29,6 +29,10 @@ module.exports = generators.Base.extend({
             var _source = cwd + "/node_modules/TopuNet-RequireJS/widget";
             var _des = "web/widget";
             this.directory(_source, _des);
+
+            var _source = cwd + "/node_modules/TopuNet-RequireJS/fis-conf.js";
+            var _des = "web/fis-conf.js";
+            this.copy(_source, _des);
         },
         copy_AMD_modules: function() {
             var _source = cwd + "/node_modules/TopuNet-AMD-modules/modules";

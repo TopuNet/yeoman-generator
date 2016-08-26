@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.8
+# yeoman-generator v1.1.9
 ### 安装：npm install generator-topu
 
 
@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.9
+
+	        1. topu:common：template增加/fis-conf.js
+
 v1.1.8
 
 	        1. topu:common增加插件：TopuNet-QueueLazyLoad
