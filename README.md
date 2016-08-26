@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.7
+# yeoman-generator v1.1.8
 ### 安装：npm install generator-topu
 
 
@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.8
+
+	        1. topu:common增加插件：TopuNet-QueueLazyLoad
+
 v1.1.7
 
 	        1. topu:common增加插件：TopuNet-WaterFall
