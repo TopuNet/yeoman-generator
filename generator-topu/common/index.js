@@ -14,7 +14,7 @@ module.exports = generators.Base.extend({
     },
     install: {
         npm: function() {
-            this.npmInstall(["TopuNet-RequireJS", "TopuNet-AMD-modules", "TopuNet-PromptLayer-JS", "TopuNet-RotatingBanner", "TopuNet-BaiduMap", "TopuNet-js-functions", "TopuNet-Pic-code", "TopuNet-dropDownLoad", "TopuNet-WaterFall", "TopuNet-QueueLazyLoad"]);
+            this.npmInstall(["TopuNet-RequireJS", "TopuNet-AMD-modules", "TopuNet-PromptLayer-JS", "TopuNet-RotatingBanner", "TopuNet-BaiduMap", "TopuNet-js-functions", "TopuNet-Pic-code", "TopuNet-dropDownLoad", "TopuNet-WaterFall", "TopuNet-QueueLazyLoad", "TopuNet-JsHintify"]);
         },
         bower: function() {
             // this.bowerInstall(["jquery"]);
@@ -93,6 +93,12 @@ module.exports = generators.Base.extend({
             var _source, _des;
             _source = cwd + "/node_modules/TopuNet-QueueLazyLoad/QueueLazyLoad.js";
             _des = "web/widget/lib/QueueLazyLoad.js";
+            this.copy(_source, _des);
+        },
+        copy_JsHintify: function() {
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-JsHintify/.jshintrc";
+            _des = "web/.jshintrc";
             this.copy(_source, _des);
         }
     }
