@@ -17,8 +17,9 @@ module.exports = generators.Base.extend({
     },
     end: {
         copy_node_functions: function() {
-            var _source = cwd + "/node_modules/TopuNet-weixin-node/weixin.js";
-            var _des = cwd + "/web/handle/weixin.js";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-weixin-node/weixin.js";
+            _des = cwd + "/web/handle/weixin.js";
             this.copy(_source, _des);
         }
     }

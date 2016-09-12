@@ -22,69 +22,77 @@ module.exports = generators.Base.extend({
     },
     end: {
         copy_RequireJS: function() {
-            var _source = cwd + "/node_modules/TopuNet-RequireJS/inc";
-            var _des = "web/inc";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-RequireJS/inc";
+            _des = "web/inc";
             this.directory(_source, _des);
 
-            var _source = cwd + "/node_modules/TopuNet-RequireJS/widget";
-            var _des = "web/widget";
+            _source = cwd + "/node_modules/TopuNet-RequireJS/widget";
+            _des = "web/widget";
             this.directory(_source, _des);
 
-            var _source = cwd + "/node_modules/TopuNet-RequireJS/fis-conf.js";
-            var _des = "web/fis-conf.js";
+            _source = cwd + "/node_modules/TopuNet-RequireJS/fis-conf.js";
+            _des = "web/fis-conf.js";
             this.copy(_source, _des);
         },
         copy_AMD_modules: function() {
-            var _source = cwd + "/node_modules/TopuNet-AMD-modules/modules";
-            var _des = "web/widget/modules";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-AMD-modules/modules";
+            _des = "web/widget/modules";
             this.directory(_source, _des);
         },
         copy_PromptLayer_JS: function() {
-            var _source = cwd + "/node_modules/TopuNet-PromptLayer-JS/css";
-            var _des = "web/inc";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-PromptLayer-JS/css";
+            _des = "web/inc";
             this.directory(_source, _des);
 
-            var _source = cwd + "/node_modules/TopuNet-PromptLayer-JS/jq";
-            var _des = "web/widget/lib";
+            _source = cwd + "/node_modules/TopuNet-PromptLayer-JS/jq";
+            _des = "web/widget/lib";
             this.directory(_source, _des);
         },
         copy_RotatingBanner: function() {
-
-            var _source = cwd + "/node_modules/TopuNet-RotatingBanner/jq";
-            var _des = "web/widget/lib";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-RotatingBanner/jq";
+            _des = "web/widget/lib";
             this.directory(_source, _des);
         },
         copy_BaiduMap: function() {
-            var _source = cwd + "/node_modules/TopuNet-BaiduMap/inc";
-            var _des = "web/inc";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-BaiduMap/inc";
+            _des = "web/inc";
             this.directory(_source, _des);
 
-            var _source = cwd + "/node_modules/TopuNet-BaiduMap/jq";
-            var _des = "web/widget/lib";
+            _source = cwd + "/node_modules/TopuNet-BaiduMap/jq";
+            _des = "web/widget/lib";
             this.directory(_source, _des);
         },
         copy_Pic_code: function() {
-            var _source = cwd + "/node_modules/TopuNet-Pic-code/jq/pic_code.js";
-            var _des = "web/widget/lib/pic_code.js";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-Pic-code/jq/pic_code.js";
+            _des = "web/widget/lib/pic_code.js";
             this.copy(_source, _des);
         },
         copy_dropDownLoad: function() {
-            var _source = cwd + "/node_modules/TopuNet-dropDownLoad/inc";
-            var _des = "web/inc";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-dropDownLoad/inc";
+            _des = "web/inc";
             this.directory(_source, _des);
 
-            var _source = cwd + "/node_modules/TopuNet-dropDownLoad/jq";
-            var _des = "web/widget/lib";
+            _source = cwd + "/node_modules/TopuNet-dropDownLoad/jq";
+            _des = "web/widget/lib";
             this.directory(_source, _des);
         },
         copy_WaterWall: function() {
-            var _source = cwd + "/node_modules/TopuNet-WaterFall/WaterFall.js";
-            var _des = "web/widget/lib/WaterFall.js";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-WaterFall/WaterFall.js";
+            _des = "web/widget/lib/WaterFall.js";
             this.copy(_source, _des);
         },
         copy_QueueLazyLoad: function() {
-            var _source = cwd + "/node_modules/TopuNet-QueueLazyLoad/QueueLazyLoad.js";
-            var _des = "web/widget/lib/QueueLazyLoad.js";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-QueueLazyLoad/QueueLazyLoad.js";
+            _des = "web/widget/lib/QueueLazyLoad.js";
             this.copy(_source, _des);
         }
     }

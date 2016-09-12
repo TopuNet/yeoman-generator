@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+// var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -8,7 +8,7 @@ var xmlParser = require('express-xml-parser');
 var ejs = require('ejs');
 var partials = require('express-partials');
 var session = require('express-session');
-var func = require('./handle/functions')
+var func = require('./handle/functions');
 var config = require("./handle/config.js");
 
 var app = express();
@@ -52,7 +52,7 @@ app.engine('.html', ejs.__express);
  */
 app.locals.checkHave = function(str, Pat) {
     return func.checkHave(str, Pat);
-}
+};
 
 /*
  * 高京
@@ -63,7 +63,7 @@ app.locals.checkHave = function(str, Pat) {
  */
 app.locals.shenglue = function(str, len, showMore) {
     return func.ShengLue(str, len, showMore);
-}
+};
 
 /*
  * 高京
@@ -73,7 +73,7 @@ app.locals.shenglue = function(str, len, showMore) {
  */
 app.locals.transParameters = function(query, Filter_Para) {
     return func.transParameters(query, Filter_Para);
-}
+};
 
 /*
  * 高京
@@ -83,7 +83,7 @@ app.locals.transParameters = function(query, Filter_Para) {
  */
 app.locals.dateFormat = function(dt, kind) {
     return func.dateFormat(dt, kind);
-}
+};
 
 /*
  * 高京
@@ -92,7 +92,7 @@ app.locals.dateFormat = function(dt, kind) {
  */
 app.locals.formatTextArea = function(str) {
     return func.formatTextArea(str);
-}
+};
 
 /*
  * 高京
@@ -103,7 +103,7 @@ app.locals.formatTextArea = function(str) {
  */
 app.locals.NameMask = function(str, mask, length) {
     return func.NameMask(str, mask, length);
-}
+};
 
 /*
  * 高京
@@ -114,7 +114,7 @@ app.locals.NameMask = function(str, mask, length) {
  */
 app.locals.MobileMask = function(str, mask, length) {
     return func.MobileMask(str, mask, length);
-}
+};
 
 
 /*

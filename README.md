@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.9
+# yeoman-generator v1.1.10
 ### 安装：npm install generator-topu
 
 
@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.10
+
+	        1. 每个文件夹根目录的js文件通过jshint验证，内含node.js文件还没做处理
+	        
 v1.1.9
 
 	        1. topu:common：template增加/fis-conf.js

@@ -22,17 +22,19 @@ module.exports = generators.Base.extend({
     },
     end: {
         copy_jquery: function() {
-            var _source = cwd + "/node_modules/jquery/dist/jquery.min.js";
-            var _des = cwd + "/web/widget/lib/jquery.min.js";
+            var _source, _des;
+            _source = cwd + "/node_modules/jquery/dist/jquery.min.js";
+            _des = cwd + "/web/widget/lib/jquery.min.js";
             this.copy(_source, _des);
         },
         copy_GrayScale: function() {
-            var _source = cwd + "/node_modules/TopuNet-GrayScale/inc";
-            var _des = "web/inc";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-GrayScale/inc";
+            _des = "web/inc";
             this.directory(_source, _des);
 
-            var _source = cwd + "/node_modules/TopuNet-GrayScale/jq";
-            var _des = "web/widget/lib";
+            _source = cwd + "/node_modules/TopuNet-GrayScale/jq";
+            _des = "web/widget/lib";
             this.directory(_source, _des);
         }
     }

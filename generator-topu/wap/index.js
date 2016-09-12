@@ -22,17 +22,19 @@ module.exports = generators.Base.extend({
     },
     end: {
         copy_mobile_stop_moved: function() {
-            var _source = cwd + "/node_modules/TopuNet-mobile-stop-moved/mobile_stop_moved.js";
-            var _des = "web/widget/lib/mobile_stop_moved.js";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-mobile-stop-moved/mobile_stop_moved.js";
+            _des = "web/widget/lib/mobile_stop_moved.js";
             this.copy(_source, _des);
         },
         copy_Landscape_mask: function() {
-            var _source = cwd + "/node_modules/TopuNet-Landscape-Mask/inc";
-            var _des = "web/inc";
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-Landscape-Mask/inc";
+            _des = "web/inc";
             this.directory(_source, _des);
 
-            var _source = cwd + "/node_modules/TopuNet-Landscape-Mask/jq";
-            var _des = "web/widget/lib";
+            _source = cwd + "/node_modules/TopuNet-Landscape-Mask/jq";
+            _des = "web/widget/lib";
             this.directory(_source, _des);
         }
     }
