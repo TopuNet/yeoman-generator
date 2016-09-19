@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.11
+# yeoman-generator v1.1.12
 ### 安装：npm install generator-topu
 
 
@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.12
+
+	        1. topu:common修改插件TopuNet-JsHintify为TopuNet-JsHint4Sublime
+
 v1.1.11
 
 	        1. topu:common增加插件：TopuNet-JsHintify
