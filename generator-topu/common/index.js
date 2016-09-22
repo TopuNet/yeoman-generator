@@ -100,6 +100,12 @@ module.exports = generators.Base.extend({
             _source = cwd + "/node_modules/TopuNet-JsHint4Sublime/.jshintrc";
             _des = "web/.jshintrc";
             this.copy(_source, _des);
+        },
+        copy_js_functions: function() {
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-js-functions/functions.js";
+            _des = "web/widget/lib/functions.js";
+            this.copy(_source, _des);
         }
     }
 
