@@ -14,7 +14,7 @@ module.exports = generators.Base.extend({
     },
     install: {
         npm: function() {
-            this.npmInstall(["TopuNet-mobile-stop-moved", "TopuNet-Landscape-Mask"]);
+            this.npmInstall(["TopuNet-mobile-stop-moved", "TopuNet-Landscape-Mask", "TopuNet-ImageCropCompressorH5"]);
         },
         bower: function() {
             // this.bowerInstall(["jquery"]);
@@ -34,6 +34,12 @@ module.exports = generators.Base.extend({
             this.directory(_source, _des);
 
             _source = cwd + "/node_modules/TopuNet-Landscape-Mask/jq";
+            _des = "web/widget/lib";
+            this.directory(_source, _des);
+        },
+        copy_ImageCropCompressorH5: function() {
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-ImageCropCompressorH5/widget/lib";
             _des = "web/widget/lib";
             this.directory(_source, _des);
         }

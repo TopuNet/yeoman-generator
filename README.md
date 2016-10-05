@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.13
+# yeoman-generator v1.1.14
 ### 安装：npm install generator-topu
 
 
@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.14
+
+	        1. topu:wap增加TopuNet-ImageCropCompressorH5。
+
 v1.1.13
 
 	        1. topu:common修复bug：忘copy functions.js到项目了。
