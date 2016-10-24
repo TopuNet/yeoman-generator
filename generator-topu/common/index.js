@@ -43,10 +43,6 @@ module.exports = generators.Base.extend({
         },
         copy_PromptLayer_JS: function() {
             var _source, _des;
-            _source = cwd + "/node_modules/TopuNet-PromptLayer-JS/css";
-            _des = "web/inc";
-            this.directory(_source, _des);
-
             _source = cwd + "/node_modules/TopuNet-PromptLayer-JS/jq";
             _des = "web/widget/lib";
             this.directory(_source, _des);
