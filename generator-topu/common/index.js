@@ -55,10 +55,6 @@ module.exports = generators.Base.extend({
         },
         copy_BaiduMap: function() {
             var _source, _des;
-            _source = cwd + "/node_modules/TopuNet-BaiduMap/inc";
-            _des = "web/inc";
-            this.directory(_source, _des);
-
             _source = cwd + "/node_modules/TopuNet-BaiduMap/jq";
             _des = "web/widget/lib";
             this.directory(_source, _des);
