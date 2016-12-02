@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.16
+# yeoman-generator v1.1.17
 ### 安装：npm install generator-topu
 
 
@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.17
+
+	        1. 修改topu:node/template/launch/www.js中的注释
+
 v1.1.16
 
 	        1. 因为BaiduMap的修改，随之修改topu:common。

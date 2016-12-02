@@ -14,7 +14,7 @@ module.exports = generators.Base.extend({
     },
     install: {
         npm: function() {
-            this.npmInstall(["TopuNet-RequireJS", "TopuNet-AMD-modules", "TopuNet-PromptLayer-JS", "TopuNet-RotatingBanner", "TopuNet-BaiduMap", "TopuNet-js-functions", "TopuNet-Pic-code", "TopuNet-dropDownLoad", "TopuNet-WaterFall", "TopuNet-QueueLazyLoad", "TopuNet-JsHint4Sublime"]);
+            this.npmInstall(["TopuNet-RequireJS", "TopuNet-AMD-modules", "TopuNet-PromptLayer-JS", "TopuNet-RotatingBanner", "TopuNet-BaiduMap", "TopuNet-js-functions", "TopuNet-Pic-code", "TopuNet-dropDownLoad", "TopuNet-WaterFall", "TopuNet-QueueLazyLoad", "TopuNet-JsHint4Sublime", "TopuNet-LayerShow"]);
         },
         bower: function() {
             // this.bowerInstall(["jquery"]);
@@ -98,6 +98,16 @@ module.exports = generators.Base.extend({
             _source = cwd + "/node_modules/TopuNet-js-functions/functions.js";
             _des = "web/widget/lib/functions.js";
             this.copy(_source, _des);
+        },
+        copy_LayerShow: function() {
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-LayerShow/inc";
+            _des = "web/inc";
+            this.directory(_source, _des);
+
+            _source = cwd + "/node_modules/TopuNet-LayerShow/widget/lib";
+            _des = "web/widget/lib";
+            this.directory(_source, _des);
         }
     }
 

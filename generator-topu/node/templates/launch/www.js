@@ -1,7 +1,7 @@
 //#!/usr/bin/env node
 
 /**
- Copy from T - TouRongQuan 投融圈 by 高京
+ Build By generator-topu:node
  * Module dependencies.
  */
 
