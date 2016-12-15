@@ -14,7 +14,7 @@ module.exports = generators.Base.extend({
     },
     install: {
         npm: function() {
-            this.npmInstall(["TopuNet-RequireJS", "TopuNet-AMD-modules", "TopuNet-PromptLayer-JS", "TopuNet-RotatingBanner", "TopuNet-BaiduMap", "TopuNet-js-functions", "TopuNet-Pic-code", "TopuNet-dropDownLoad", "TopuNet-WaterFall", "TopuNet-QueueLazyLoad", "TopuNet-JsHint4Sublime", "TopuNet-LayerShow"]);
+            this.npmInstall(["TopuNet-RequireJS", "TopuNet-AMD-modules", "TopuNet-PromptLayer-JS", "TopuNet-RotatingBanner", "TopuNet-BaiduMap", "TopuNet-js-functions", "TopuNet-Pic-code", "TopuNet-dropDownLoad", "TopuNet-WaterFall", "TopuNet-QueueLazyLoad", "TopuNet-JsHint4Sublime", "TopuNet-LayerShow", "topunet-layerdrag"]);
         },
         bower: function() {
             // this.bowerInstall(["jquery"]);
@@ -108,6 +108,12 @@ module.exports = generators.Base.extend({
             _source = cwd + "/node_modules/TopuNet-LayerShow/widget/lib";
             _des = "web/widget/lib";
             this.directory(_source, _des);
+        },
+        copy_layer_drag: function() {
+            var _source, _des;
+            _source = cwd + "/node_modules/topunet-layerdrag/LayerDrag.js";
+            _des = "web/widget/lib/LayerDrag.js";
+            this.copy(_source, _des);
         }
     }
 
