@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.18
+# yeoman-generator v1.1.19
 ### 安装：npm install generator-topu
 
 
@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.19
+
+	        1. topu:node更新模板文件：/handle/config.js
+
 v1.1.18
 
 	        1. topu:common增加插件：topunet-layerdrag

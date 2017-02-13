@@ -1,4 +1,4 @@
-﻿/*
+/*
  *@ 高京
  *@ 20150824 
  *@ 全局配置文件，添加属性的话，请先确认没有功能类同的属性存在
@@ -11,270 +11,183 @@ var config = require('./config.js');
 var fs = require('fs'); //文件操作模块，updateMember用
 
 
-exports.session_secret = "6a8g6k7w2b9h1n8v"; //session密钥
+/*exports.host = "192.168.1.58"; //接口调用主机地址（本地测试）
+exports.port = 8130; //端口号*/
+exports.host = "qingfeng.65276588.cn"; //接口调用主机地址(网上)
+exports.port = 18080; //端口号
 
-//exports.host = "192.168.1.58"; //接口调用主机地址（本地测试）
-//exports.port = 8122; //端口号
-exports.host = "www.51icb.com"; //接口调用主机地址(网上)
-exports.port = 80; //端口号
-
-exports.sendhost = "business.51icb.com"; //发送邮件接口调用主机地址(网上)
-exports.sendport = 80; //端口号
-
+exports.session_secret = "1z4d7r2t5h8m3k6o8a4z5e1g7f5u3a0y"; //session密钥
 
 // exports.cookieName_Member = "TouRongQuan2015_Member"; //登录用的cookie名称
 // exports.cookies_key = [2, 5, 6, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 22, 25, 29]; //从cookies中取出密码的16位秘钥数组(内部值不能大于32,且从小到大排序)
 // exports.cookies_str = "6a8g6k7w2b9h1n8v6a8g6k7w2b9h1n8v"; //定义在cookies中为密码加密的32位随机变量
 
-exports.ImageDomain = "http://www.51icb.com/b/"; //数据库中读取的图片的域名前缀
+exports.ImageDomain = "http://qingfeng.65276588.cn:18080"; //数据库中读取的图片的域名前缀  (网上)
 
+/*exports.ImageDomain = "http://192.168.1.58:8130"; //数据库中读取的图片的域名前缀 (本地测试)*/
+
+
+// 访问接口获得数据方法
 /*
- *@ 陈斌
- *@ 20160301
- *@ 页面公用绑定参数，更新方法：config.GetCommon(callback_success)
- */
-exports.Common={
-    seo:null
-    , footer: null
-    ,menu:null
-}
+    callback:function(err, result)，err===null时为request正常;
+    Json_Select: [{
+        "cache": 缓存obj，如不需缓存，传null。如需使用上下级连带数据，不要使用缓存。
+        "type": "Article",
+        "act": "Select_List",
+        "para": {
+            "params": {
+                见wf文档
+            },
+            "pages": {
+                见wf文档
+            }
+        }
+    },
+    {}];
+    validate_k: 1(默认)-签名认证 2-adminUsers的Token认证;
+    valid_token_obj: 
+        validate_k=2时:
+        {
+            "Auser": "topu.net",
+            "token": "0eff33c8631a4b69196a11b6db065b380a5d22c0"
+        }
+*/
+exports.getDataFromRestFul = function(callback, Json_Select, validate_k, valid_token_obj) {
+    validate_k = validate_k || "1";
+    validate_token_obj = valid_token_obj || "";
+
+    // 接口地址
+    var RestFul_url = "http://" + config.host + ":" + config.port + "/Handler/Handlers.ashx";
+
+    // 成功回调
+    var finish_deal = function(err, result) {
+        callback(err, result);
+    };
+
+    var i = 0,
+        j = 0,
+        len = Json_Select.length,
+        cache_obj = null,
+        cache_result = [],
+        Json_Select_Result = [],
+        result = [];
+
+    // 遍历Json_Select，判断缓存，生成签名，组织para
+    for (; i < len; i++) {
+        cache_obj = Json_Select[i].cache;
+        
+        // 清掉cache
+        Json_Select[i].cache = "";
+
+        // 如使用缓存且有缓存，则记录缓存数据并跳过
+        if (typeof cache_obj === "object" && cache_obj !== null) {
+            cache_result[i] = cache_obj;
+            continue;
+        }
+        // 生成签名
+        Json_Select[i].para.sign_valid = func.CreateTopuSignatureSync(Json_Select[i].para.params);
+
+        // 拼接最终的查询条件
+        Json_Select_Result[j++] = Json_Select[i];
+    }
+
+    if (j === 0) { // 无需调用，全部使用缓存
+        i = 0;
+        len = cache_result.length;
+        for (; i < len; i++) {
+            result[i] = cache_result[i];
+        }
+        finish_deal(null, result);
+    } else { // 调用接口
+
+        // 调接口参数
+        var ajax_para = {
+            "validate_k": validate_k,
+            "adminUsers": valid_token_obj,
+            "params": Json_Select_Result
+        };
+
+        var opt = {
+            url: RestFul_url,
+            method: "post_json",
+            PostData: ajax_para
+        };
+
+        func.Request(opt, function(data) {
+            
+            var i = 0,
+                j = 0,
+                len=Json_Select.length;
+
+            for (; i < len; i++) {
+                if (cache_result[i] === null || cache_result[i] === "" || cache_result[i] === undefined) {
+                    result[i] = data.result[j++];
+                } else {
+                    result[i] = cache_result[i];
+                }
+            }
+            
+            finish_deal(null, result);
+
+        }, function(err) {
+            finish_deal(err);
+        });
+    }
+};
+
+
+//Advertise,Init,Info缓存
+exports.CacheData = {
+    Advertise: null,
+    Init: null,
+    Info: null
+};
+
 /*
  *@ 陈斌
  *@ 20160301
  *@ 【同步】获得页面公用参数
- *@ ieTitle_ex：不为空时，config.Common.seo返回ieTitle_ex - config.seo.ieTitle；否则config.Common.seo返回config.seo.ieTitle
- *@ seoKeywords：不为空时config.Common.seo返回seoKeywords；否则config.Common.seo返回config.seo.seoKeywords
- *@ seoDescription：不为空时config.Common.seo返回seoDescription；否则config.Common.seo返回config.seo.seoDescription
- *@ menu:菜单栏高亮显示的部分,默认为首页高亮
- */
-exports.GetCommon = function (ieTitle_ex, seoKeywords, seoDescription, menu) {
-    
-    var arr = [config.Common.seo, config.Common.footer, config.Common.menu];
-    arr[0]=config.Common.seo =config.getSEO(ieTitle_ex, seoKeywords, seoDescription);
-    arr[1] = config.Common.footer = config.footer;
-    if (menu == null||menu=="") {
-        menu = 1;
+ *@ 返回：
+    {
+        seo: {
+            ieTitle: '',
+            seoKeywords: '',
+            seoDescription: ''
+        }
     }
-    arr[2] = config.Common.menu =menu;
-    return arr;
-}
-    
-
-
-
-
-
-
-/*
- *@ 陈斌
- *@ 20160311
- *@ Advertise，异步更新方法：config.updateAdvertise(callback_success)
+ *@ ieTitle_ex：不为空时，seo.ieTitle返回ieTitle_ex - config.CacheData.Init[0].Iinfo + " - " + config.CacheData.Init[2].Iinfo;否则返回config.CacheData.Init[0].Iinfo + " - " + config.CacheData.Init[2].Iinfo;
+ *@ seoKeywords：不为空时，返回seoKeywords；否则返回config.CacheData.Init[3].Iinfo;
+ *@ seoDescription：不为空时，返回seoDescription；否则返回config.CacheData.Init[4].Iinfo;
  */
-exports.Advertise = null; //(Advertise)
+exports.GetCommon = function(ieTitle_ex, seoKeywords_ex, seoDescription_ex, num) {
+    var ieTitle = config.CacheData.Init.list[0].Iinfo + " - " + config.CacheData.Init.list[2].Iinfo;
+    var seoKeywords = config.CacheData.Init.list[3].Iinfo;
+    var seoDescription = config.CacheData.Init.list[4].Iinfo;
+    var menu = num;
 
+    //版权信息
+    var copyright = config.CacheData.Info.list[0].Iinfo;
 
-/*
- *@ 高京
- *@ 20151106
- *@ 发送邮件服务器信息 [QQ邮箱账号,密码]，异步更新方法：config.updateMailServer(callback_success)
- */
-exports.mail_server = null; //(Init)
+    if (ieTitle_ex !== undefined && ieTitle_ex !== "")
+        ieTitle = ieTitle_ex + " - " + ieTitle;
+    if (seoKeywords_ex !== undefined && seoKeywords_ex !== "")
+        seoKeywords = seoKeywords_ex;
+    if (seoDescription_ex !== undefined && seoDescription_ex !== "")
+        seoDescription = seoDescription_ex;
 
-/*
- *@ 高京
- *@ 20151106
- *@ 信息反馈接收邮箱，异步更新方法：config.updateMailReceive(callback_success)
- */
-exports.mail_receive = null; //(Init)
-
-
-/*
- *@ 高京
- *@ 20151029
- *@ seo缓存，异步更新方法：config.updateSEO(callback_success)
- */
-exports.seo = {
-    ieTitle: null, //标题 - 副标题(Init)
-    seoKeywords: null, //关键字(Init)
-    seoDescription: null //描述(Init)
-};
-
-
-/*
- *@ 高京
- *@ 20151029
- *@ 【同步】获得seo绑定，返回数组{ieTitle,seoKeywords,seoDescription}
- *@ ieTitle_ex：不为空时，返回ieTitle_ex - config.seo.ieTitle；否则返回config.seo.ieTitle
- *@ seoKeywords：不为空时返回seoKeywords；否则返回config.seo.seoKeywords
- *@ seoDescription：不为空时返回seoDescription；否则返回config.seo.seoDescription
- */
-exports.getSEO = function(ieTitle_ex, seoKeywords, seoDescription) {
-
-    var arr = [config.seo.ieTitle, config.seo.seoKeywords, config.seo.seoDescription];
-
-    if (ieTitle_ex != undefined && ieTitle_ex != "")
-        arr[0] = ieTitle_ex + " - " + config.seo.ieTitle;
-    if (seoKeywords != undefined && seoKeywords != "")
-        arr[1] = seoKeywords;
-    if (seoDescription != undefined && seoDescription != "")
-        arr[2] = seoDescription;
-
-    return arr;
-}
-
-
-/*
- *@ 高京
- *@ 20151029
- *@ 【异步】更新SEO缓存
- */
-exports.updateSEO = function(callback_success) {
-
-    var n = 0;
-    var updating = function() {
-        if (++n < 1)
-            return;
-        callback_success();
-    };
-
-    var updateSEO_Init = function() {
-
-        if (config.seo.ieTitle != null) {
-            updating();
-            return;
+    return {
+        seo: {
+            ieTitle: ieTitle,
+            seoKeywords: seoKeywords,
+            seoDescription: seoDescription
+        },
+        footer: {
+            copyright: copyright
+        },
+        menu: {
+            menu: menu
         }
-
-        var Json_Params = func.JsonUnicode({
-            "s_not_Iid": ""
-        });
-        var ParamsJsonObj_str = JSON.stringify(Json_Params);
-        ParamsJsonObj_str = ParamsJsonObj_str.replace("}{", ",");
-        var ParamsJsonObj = JSON.parse(ParamsJsonObj_str);
-        //生成签名
-        func.CreateTopuSignature(ParamsJsonObj, function(sign_valid) {
-
-            var ajax_para_str = "{ \"params\": " + JSON.stringify(func.JsonEscape(Json_Params)) + " , \"sign_valid\": " + sign_valid + " }";
-
-            var ajax_para = JSON.parse(ajax_para_str);
-
-            // 调用接口
-            func.DoREST(config.host, config.port, "/Handler/Init.ashx?act=select_list" + "&r=" + Math.random(), "POST", ajax_para, function(data) {
-                if (data.error == "SUCCESS" || data.error == "success") {
-                    config.seo.ieTitle = data.list[0].Iinfo + " - " + data.list[2].Iinfo;
-                    config.seo.seoKeywords = data.list[3].Iinfo;
-                    config.seo.seoDescription = data.list[4].Iinfo;
-                } else {
-                    console.log("\n updateSEO_Init:" + JSON.stringify(data));
-                }
-                updating();
-            }, function(e) {
-                console.log("\n updateSEO_Init:" + e);
-                updating();
-            });
-        });
     };
-
-    updateSEO_Init();
-};
-
-/*
- *@ 陈斌
- *@ 20160229
- *@ footer缓存，异步更新方法：config.updateFooter(callback_success)
- */
-exports.footer = {
-    channel: null    //购买渠道
-    , WeChat: null   //微信
-    , weibo: null    //5-新浪微博
-};
-
-
-/*
- *@ 陈斌
- *@ 20150229
- *@ 【异步】更新footer缓存
- */
-exports.updateFooter = function (callback_success) {
-    var n = 0;
-    var _i;
-
-    var updating = function () {
-        if (++n < 2)
-            return;
-        callback_success();
-    };
-
-    var updateFooter_Article = function () {
-       
-        var Json_Params = func.JsonUnicode({
-            "s_Aid": "",
-            "s_Alive": "1",
-            "s_d1": "",
-            "s_d2": "",
-            "s_Keywords": "",
-            "s_Kind":"52",
-            "s_Order": ""
-        });
-        var Json_Pages = func.JsonUnicode({
-            "p_c": "",
-            "p_First": "",
-            "p_inputHeight": "",
-            "p_Last": "",
-            "p_method": "",
-            "p_Next": "",
-            "p_Page": "1",
-            "p_pageName": "",
-            "p_PageStyle": "",
-            "p_Pname": "",
-            "p_Previous": "",
-            "p_Ps": "5",
-            "p_sk": "",
-            "p_Tp": ""
-        });
-
-      
-        var ParamsJsonObj_str = JSON.stringify(Json_Params);
-        var ParamsJsonObj = JSON.parse(ParamsJsonObj_str);
-        //生成签名
-        func.CreateTopuSignature(ParamsJsonObj, function (sign_valid) {
-            var ajax_para_str = "{ \"params\": " + JSON.stringify(func.JsonEscape(Json_Params)) + ", \"pages\": " + JSON.stringify(func.JsonEscape(Json_Pages)) + " , \"sign_valid\": " + sign_valid + " }";
-
-            var ajax_para = JSON.parse(ajax_para_str);
-            //调用接口
-            func.DoREST(config.host, config.port, "/Handler/Article.ashx?act=select_list" + "&r=" + Math.random(), "POST", ajax_para, function (data) {
-                if (data.error == "SUCCESS" || data.error == "success") {
-                   
-                    config.footer.channel = data.list;
-
-                } else {
-                    console.log("\n updateFooter_Article:" + JSON.stringify(data));
-                }
-                updating();
-            }, function (e) {
-                console.log("\n updateFooter_Article_e:" + e);
-                updating();
-            });
-
-        });
-    };
-
-
-    var updateFooter_Advertise = function () {
-
-        if (config.footer.Rcode != null) {
-            updating();
-            return;
-        }
-
-        config.updateAdvertise(function () {
-            config.footer.WeChat = config.Advertise[3].Pic1;
-            config.footer.weibo = config.Advertise[4].Url;
-            updating();
-        });
-    };
-
-    updateFooter_Article();
-    updateFooter_Advertise();
 };
 
 
@@ -311,65 +224,48 @@ exports.multer_fileFilter = function(req, file, cb) {
 
 };
 
+
 /*
  *@ 陈斌
- *@ 20150229
- *@ 【异步】更新Advertise
+ *@ 20150722
+ *@ 【异步】更新Advertise,Init,Info
  */
-exports.updateAdvertise = function(callback_success) {
+exports.updateCacheData = function(callback_success) {
 
-    var n = 0;
-
-    var updating = function() {
-        if (++n < 1)
-            return;
-        callback_success();
-    };
-
-    var updateAdvertise = function() {
-
-        if (config.Advertise != null) {
-            updating();
-            return;
+    var Json_Select = [{
+        "cache": config.CacheData.Advertise,
+        "type": "Advertise",
+        "act": "Select_List",
+        "para": {
+            "params": {
+                "s_Aid": "",
+                "s_Total_parameter": "Aid,Atitle,Url,Pic1"
+            }
         }
+    }, {
+        "cache": config.CacheData.Init,
+        "type": "Init",
+        "act": "Select_List",
+        "para": {
+            "params": {
+                "s_not_Iid": ""
+            }
+        }
+    }, {
+        "cache": config.CacheData.Info,
+        "type": "Info",
+        "act": "Select_List",
+        "para": {
+            "params": {
+                "s_Iid": ""
+            }
+        }
+    }];
+    config.getDataFromRestFul(function(err, data) {
+        config.CacheData.Advertise = data[0];
+        config.CacheData.Init = data[1];
+        config.CacheData.Info = data[2];
+        callback_success();
+    }, Json_Select);
 
-        var Json_Params = func.JsonUnicode({
-            "s_Aid": ""
-        });
-
-        var ParamsJsonObj_str = JSON.stringify(Json_Params);
-        var ParamsJsonObj = JSON.parse(ParamsJsonObj_str);
-        //生成签名
-        func.CreateTopuSignature(ParamsJsonObj, function(sign_valid) {
-
-            var ajax_para_str = "{ \"params\": " + JSON.stringify(func.JsonEscape(Json_Params)) + " , \"sign_valid\": " + sign_valid + " }";
-
-            var ajax_para = JSON.parse(ajax_para_str);
-
-            func.DoREST(config.host, config.port, "/Handler/Advertise.ashx?act=select_list" + "&r=" + Math.random(), "POST", ajax_para, function(data) {
-
-                if (data.error.toLowerCase() == "success") {
-                    config.Advertise = data.list;
-                } else {
-                    console.log("\n updateAdvertise:" + JSON.stringify(data));
-                }
-                updating();
-            }, function(e) {
-                console.log("\n updateAdvertise_e:");
-                console.log(e);
-                updating();
-            });
-        });
-    };
-
-    updateAdvertise();
 };
-
-
-/*
- *@ 陈斌
- *@ 20160311
- *@ Info
- */
-exports.Info = null; //(Info)
-
