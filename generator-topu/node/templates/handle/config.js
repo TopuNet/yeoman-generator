@@ -1,6 +1,6 @@
 /*
  *@ 高京
- *@ 20150824 
+ *@ 20150824
  *@ 全局配置文件，添加属性的话，请先确认没有功能类同的属性存在
  */
 var express = require("express");
@@ -11,10 +11,6 @@ var config = require('./config.js');
 var fs = require('fs'); //文件操作模块，updateMember用
 
 
-/*exports.host = "192.168.1.58"; //接口调用主机地址（本地测试）
-exports.port = 8130; //端口号*/
-exports.host = "qingfeng.65276588.cn"; //接口调用主机地址(网上)
-exports.port = 18080; //端口号
 
 exports.session_secret = "1z4d7r2t5h8m3k6o8a4z5e1g7f5u3a0y"; //session密钥
 
@@ -22,9 +18,13 @@ exports.session_secret = "1z4d7r2t5h8m3k6o8a4z5e1g7f5u3a0y"; //session密钥
 // exports.cookies_key = [2, 5, 6, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 22, 25, 29]; //从cookies中取出密码的16位秘钥数组(内部值不能大于32,且从小到大排序)
 // exports.cookies_str = "6a8g6k7w2b9h1n8v6a8g6k7w2b9h1n8v"; //定义在cookies中为密码加密的32位随机变量
 
-exports.ImageDomain = "http://qingfeng.65276588.cn:18080"; //数据库中读取的图片的域名前缀  (网上)
+// exports.ImageDomain = "http://qingfeng.65276588.cn:80"; //数据库中读取的图片的域名前缀  (正式环境)
+// exports.host = "qingfeng.65276588.cn"; //接口调用主机地址(正式环境)
+// exports.port = 80; //端口号
 
-/*exports.ImageDomain = "http://192.168.1.58:8130"; //数据库中读取的图片的域名前缀 (本地测试)*/
+exports.ImageDomain = "http://192.168.1.58:8130"; //数据库中读取的图片的域名前缀 (测试环境)
+exports.host = "192.168.1.58"; //测试环境
+exports.port = 8130; //端口号
 
 
 // 访问接口获得数据方法
@@ -44,20 +44,22 @@ exports.ImageDomain = "http://qingfeng.65276588.cn:18080"; //数据库中读取�
         }
     },
     {}];
+    query: req.query;
     validate_k: 1(默认)-签名认证 2-adminUsers的Token认证;
-    valid_token_obj: 
+    valid_token_obj:
         validate_k=2时:
         {
             "Auser": "topu.net",
             "token": "0eff33c8631a4b69196a11b6db065b380a5d22c0"
         }
 */
-exports.getDataFromRestFul = function(callback, Json_Select, validate_k, valid_token_obj) {
+exports.getDataFromRestFul = function(callback, Json_Select, query, validate_k, valid_token_obj) {
     validate_k = validate_k || "1";
     validate_token_obj = valid_token_obj || "";
+    query = func.transParameters(query, "");
 
     // 接口地址
-    var RestFul_url = "http://" + config.host + ":" + config.port + "/Handler/Handlers.ashx";
+    var RestFul_url = "http://" + config.host + ":" + config.port + "/Handler/Handlers.ashx?" + query;
 
     // 成功回调
     var finish_deal = function(err, result) {
@@ -75,7 +77,7 @@ exports.getDataFromRestFul = function(callback, Json_Select, validate_k, valid_t
     // 遍历Json_Select，判断缓存，生成签名，组织para
     for (; i < len; i++) {
         cache_obj = Json_Select[i].cache;
-        
+
         // 清掉cache
         Json_Select[i].cache = "";
 
@@ -114,10 +116,10 @@ exports.getDataFromRestFul = function(callback, Json_Select, validate_k, valid_t
         };
 
         func.Request(opt, function(data) {
-            
+
             var i = 0,
                 j = 0,
-                len=Json_Select.length;
+                len = Json_Select.length;
 
             for (; i < len; i++) {
                 if (cache_result[i] === null || cache_result[i] === "" || cache_result[i] === undefined) {
@@ -126,7 +128,7 @@ exports.getDataFromRestFul = function(callback, Json_Select, validate_k, valid_t
                     result[i] = cache_result[i];
                 }
             }
-            
+
             finish_deal(null, result);
 
         }, function(err) {
