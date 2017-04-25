@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.20
+# yeoman-generator v1.1.21
 ### 安装：npm install generator-topu
 
 
@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.21
+
+	        1. topu 增加插件：topunet-js-uploadimg
+
 v1.1.20
 
 	        1. topu:node更新模板文件：/handle/config.js
