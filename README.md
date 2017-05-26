@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.21
+# yeoman-generator v1.1.22
 ### 安装：npm install generator-topu
 
 
