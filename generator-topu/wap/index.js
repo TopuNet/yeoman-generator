@@ -14,7 +14,7 @@ module.exports = generators.Base.extend({
     },
     install: {
         npm: function() {
-            this.npmInstall(["TopuNet-mobile-stop-moved", "TopuNet-Landscape-Mask", "TopuNet-ImageCropCompressorH5"]);
+            this.npmInstall(["TopuNet-CalendarScroller", "TopuNet-Landscape-Mask", "TopuNet-ImageCropCompressorH5", "TopuNet-CalendarScroller", "topunet-timerscroller"]);
         },
         bower: function() {
             // this.bowerInstall(["jquery"]);
@@ -42,6 +42,18 @@ module.exports = generators.Base.extend({
             _source = cwd + "/node_modules/TopuNet-ImageCropCompressorH5/widget/lib";
             _des = "web/widget/lib";
             this.directory(_source, _des);
+        },
+        copy_CalendarScroller: function() {
+            var _source, _des;
+            _source = cwd + "/node_modules/TopuNet-CalendarScroller/widget/lib/CalendarScroller.js";
+            _des = "web/widget/lib/CalendarScroller.js";
+            this.copy(_source, _des);
+        },
+        copy_timerscroller: function() {
+            var _source, _des;
+            _source = cwd + "/node_modules/topunet-timerscroller/widget/lib/TimerScroller.js";
+            _des = "web/widget/lib/TimerScroller.js";
+            this.copy(_source, _des);
         }
     }
 

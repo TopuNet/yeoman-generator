@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.22
+
+	        1. topu 增加插件：topunet-timerscroller 和 TopuNet-CalendarScroller
+
 v1.1.21
 
 	        1. topu 增加插件：topunet-js-uploadimg
