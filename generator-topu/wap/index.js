@@ -14,7 +14,7 @@ module.exports = generators.Base.extend({
     },
     install: {
         npm: function() {
-            this.npmInstall(["TopuNet-CalendarScroller", "TopuNet-Landscape-Mask", "TopuNet-ImageCropCompressorH5", "TopuNet-CalendarScroller", "topunet-timerscroller"]);
+            this.npmInstall(["TopuNet-mobile-stop-moved", "TopuNet-Landscape-Mask", "TopuNet-ImageCropCompressorH5", "TopuNet-CalendarScroller", "topunet-timerscroller"]);
         },
         bower: function() {
             // this.bowerInstall(["jquery"]);

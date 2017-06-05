@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.22
+# yeoman-generator v1.1.23
 ### 安装：npm install generator-topu
 
 
@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.23
+
+	        1. 修复wap的bug
+
 v1.1.22
 
 	        1. topu 增加插件：topunet-timerscroller 和 TopuNet-CalendarScroller
