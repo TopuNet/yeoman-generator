@@ -1,6 +1,4 @@
 /*
- *@ 高京
- *@ 20150824
  *@ 全局配置文件，添加属性的话，请先确认没有功能类同的属性存在
  */
 var express = require("express");
@@ -223,51 +221,5 @@ exports.multer_fileFilter = function(req, file, cb) {
     } else {
         cb(null, false);
     }
-
-};
-
-
-/*
- *@ 陈斌
- *@ 20150722
- *@ 【异步】更新Advertise,Init,Info
- */
-exports.updateCacheData = function(callback_success) {
-
-    var Json_Select = [{
-        "cache": config.CacheData.Advertise,
-        "type": "Advertise",
-        "act": "Select_List",
-        "para": {
-            "params": {
-                "s_Aid": "",
-                "s_Total_parameter": "Aid,Atitle,Url,Pic1"
-            }
-        }
-    }, {
-        "cache": config.CacheData.Init,
-        "type": "Init",
-        "act": "Select_List",
-        "para": {
-            "params": {
-                "s_not_Iid": ""
-            }
-        }
-    }, {
-        "cache": config.CacheData.Info,
-        "type": "Info",
-        "act": "Select_List",
-        "para": {
-            "params": {
-                "s_Iid": ""
-            }
-        }
-    }];
-    config.getDataFromRestFul(function(err, data) {
-        config.CacheData.Advertise = data[0];
-        config.CacheData.Init = data[1];
-        config.CacheData.Info = data[2];
-        callback_success();
-    }, Json_Select);
 
 };
