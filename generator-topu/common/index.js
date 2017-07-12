@@ -15,10 +15,10 @@ module.exports = generators.Base.extend({
     install: {
         npm: function() {
             this.npmInstall(["TopuNet-RequireJS", "TopuNet-AMD-modules", "TopuNet-PromptLayer-JS", "TopuNet-RotatingBanner", "TopuNet-BaiduMap", "TopuNet-js-functions", "TopuNet-Pic-code", "TopuNet-dropDownLoad", "TopuNet-WaterFall", "TopuNet-QueueLazyLoad", "TopuNet-JsHint4Sublime", "TopuNet-LayerShow", "topunet-layerdrag", "topunet-js-uploadimg"]);
-        },
-        bower: function() {
-            // this.bowerInstall(["jquery"]);
-        },
+        }
+        // bower: function() {
+        //     // this.bowerInstall(["jquery"]);
+        // },
     },
     end: {
         copy_RequireJS: function() {

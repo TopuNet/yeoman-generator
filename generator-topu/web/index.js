@@ -14,11 +14,11 @@ module.exports = generators.Base.extend({
     },
     install: {
         npm: function() {
-            this.npmInstall(["jquery@1","TopuNet-GrayScale"]);
-        },
-        bower: function() {
-            // this.bowerInstall(["jquery"]);
-        },
+            this.npmInstall(["jquery@1", "TopuNet-GrayScale", "topunet-mousewheel_roll"]);
+        }
+        // bower: function() {
+        //     // this.bowerInstall(["jquery"]);
+        // },
     },
     end: {
         copy_jquery: function() {
@@ -36,6 +36,12 @@ module.exports = generators.Base.extend({
             _source = cwd + "/node_modules/TopuNet-GrayScale/jq";
             _des = "web/widget/lib";
             this.directory(_source, _des);
+        },
+        copy_mousewheel_roll: function() {
+            var _source, _des;
+            _source = cwd + "/node_modules/topunet-mousewheel_roll/MouseWheel_Roll.js";
+            _des = cwd + "/web/widget/lib/MouseWheel_Roll.js";
+            this.copy(_source, _des);
         }
     }
 

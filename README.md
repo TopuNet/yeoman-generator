@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.24
+# yeoman-generator v1.1.25
 ### 安装：npm install generator-topu
 
 
@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.25
+
+	        1. topu 增加插件：topunet-mousewheel_roll
+
 v1.1.24
 
 	        1. 检查&修改了一些template文件
