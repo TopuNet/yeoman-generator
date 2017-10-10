@@ -61,7 +61,7 @@ module.exports = generators.Base.extend({
         },
         copy_Pic_code: function() {
             var _source, _des;
-            _source = cwd + "/node_modules/TopuNet-Pic-code/jq/pic_code.js";
+            _source = cwd + "/node_modules/TopuNet-Pic-code/pic_code.js";
             _des = "web/widget/lib/pic_code.js";
             this.copy(_source, _des);
         },

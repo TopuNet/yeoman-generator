@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.25
+# yeoman-generator v1.1.26
 ### 安装：npm install generator-topu
 
 
@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.26
+
+	        1. topu 更新zepto，包含module：zepto、event、ajax、fx、fx_methods、selector
+
 v1.1.25
 
 	        1. topu 增加插件：topunet-mousewheel_roll
