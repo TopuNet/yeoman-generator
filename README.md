@@ -37,6 +37,7 @@
 v1.1.27
 
 	        1. topu 更新node端模板文件
+	        2. common增加插件：image-mark-pen
 
 v1.1.26
 
