@@ -141,6 +141,12 @@ module.exports = generators.Base.extend({
             _source = cwd + "/node_modules/image-mark-pen/ImageMarkPen.js";
             _des = "web/widget/lib/ImageMarkPen.js";
             this.copy(_source, _des);
+            _source = cwd + "/node_modules/image-mark-pen/assets/inc";
+            _des = "web/inc";
+            this.directory(_source, _des);
+            _source = cwd + "/node_modules/image-mark-pen/assets/widget/lib";
+            _des = "web/widget/lib";
+            this.directory(_source, _des);
         }
     }
 

@@ -1,4 +1,4 @@
-# yeoman-generator v1.1.27
+# yeoman-generator v1.1.28
 ### 安装：npm install generator-topu
 
 
@@ -34,6 +34,10 @@
 
 更新日志
 --------------
+v1.1.28
+
+	        1. common修改：image-mark-pen插件少copy了资源文件
+
 v1.1.27
 
 	        1. topu 更新node端模板文件
