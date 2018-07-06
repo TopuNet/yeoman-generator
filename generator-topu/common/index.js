@@ -14,7 +14,22 @@ module.exports = generators.Base.extend({
     },
     install: {
         npm: function() {
-            this.npmInstall(["TopuNet-RequireJS", "TopuNet-AMD-modules", "TopuNet-PromptLayer-JS", "TopuNet-RotatingBanner", "TopuNet-BaiduMap", "TopuNet-js-functions", "TopuNet-Pic-code", "TopuNet-dropDownLoad", "TopuNet-WaterFall", "TopuNet-QueueLazyLoad", "TopuNet-JsHint4Sublime", "TopuNet-LayerShow", "topunet-layerdrag", "topunet-js-uploadimg"]);
+            this.npmInstall(["TopuNet-RequireJS",
+                "TopuNet-AMD-modules",
+                "TopuNet-PromptLayer-JS",
+                "TopuNet-RotatingBanner",
+                "TopuNet-BaiduMap",
+                "TopuNet-js-functions",
+                "TopuNet-Pic-code",
+                "TopuNet-dropDownLoad",
+                "TopuNet-WaterFall",
+                "TopuNet-QueueLazyLoad",
+                "TopuNet-JsHint4Sublime",
+                "TopuNet-LayerShow",
+                "topunet-layerdrag",
+                "topunet-js-uploadimg",
+                "image-mark-pen"
+            ]);
         }
         // bower: function() {
         //     // this.bowerInstall(["jquery"]);
@@ -119,6 +134,12 @@ module.exports = generators.Base.extend({
             var _source, _des;
             _source = cwd + "/node_modules/topunet-js-uploadimg/js_UploadImg.js";
             _des = "web/widget/lib/js_UploadImg.js";
+            this.copy(_source, _des);
+        },
+        copy_image_mark_pen: function() {
+            var _source, _des;
+            _source = cwd + "/node_modules/image-mark-pen/ImageMarkPen.js";
+            _des = "web/widget/lib/ImageMarkPen.js";
             this.copy(_source, _des);
         }
     }

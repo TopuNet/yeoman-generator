@@ -9,7 +9,8 @@ var ejs = require('ejs');
 var partials = require('express-partials');
 var session = require('express-session');
 var func = require('./handle/functions');
-var config = require("./handle/config.js");
+var config = require('./handle/config');
+var maxAge = require('./app_maxAge');
 
 var app = express();
 
@@ -144,10 +145,7 @@ app.use(xmlParser({
     explicitArray: false // 防止值为数组
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, ''), {
-    // maxAge: '365days' // pub
-    maxAge: '0' // dev
-}));
+app.use(express.static(path.join(__dirname, ''), maxAge));
 
 // routes
 var p404 = require('./routes/404.js'); // 404
